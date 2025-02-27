@@ -142,7 +142,8 @@ export async function POST(request: Request) {
   ] as Array<Message>;
 
   const result = await streamText({
-    model: deepseek("deepseek-chat") as any as LanguageModelV1,
+    model: openai("gpt-4o"),
+    // model: deepseek("deepseek-chat") as any as LanguageModelV1,
     // model: azure("gpt-4o"),  // You can also use Azure's hosted GPT models
     maxSteps: 5,
     messages: convertToCoreMessages(processedMessages),
