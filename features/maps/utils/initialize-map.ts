@@ -70,8 +70,8 @@ export const initializeMap = (containerId: string): maplibregl.Map => {
         }
       ],
     },
-    center: [116.397428, 39.90923],
-    zoom: 10,
+    center: [119.921786, 28.451993], // 丽水市中心坐标
+    zoom: 13,  // 可以调整缩放级别，使其更适合丽水市的显示范围
     pitch: 0,
     bearing: 0,
     antialias: true,
