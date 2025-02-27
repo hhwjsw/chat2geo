@@ -28,11 +28,11 @@ export default function useBasemapToggle({
 
     if (activeBasemap === "satellite") {
       mapInstance.setLayoutProperty(
-        "googleSatelliteImagery",
+        "amapSatelliteImagery",
         "visibility",
         "visible"
       );
-      mapInstance.setLayoutProperty("googleRoadmap", "visibility", "none");
+      mapInstance.setLayoutProperty("amapRoadmap", "visibility", "none");
 
       if (googleSatelliteAttributionRef.current) {
         googleSatelliteAttributionRef.current._container.style.display =
@@ -44,11 +44,11 @@ export default function useBasemapToggle({
       // googleAttributionRef?.current?._container.style.display = "block";
     } else {
       mapInstance.setLayoutProperty(
-        "googleSatelliteImagery",
+        "amapSatelliteImagery",
         "visibility",
         "none"
       );
-      mapInstance.setLayoutProperty("googleRoadmap", "visibility", "visible");
+      mapInstance.setLayoutProperty("amapRoadmap", "visibility", "visible");
 
       if (googleSatelliteAttributionRef.current) {
         googleSatelliteAttributionRef.current._container.style.display = "none";

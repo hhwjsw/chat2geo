@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { IconSparkles } from "@tabler/icons-react";
+import { IconPillFilled } from "@tabler/icons-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { type Message, type ToolInvocation } from "ai";
@@ -41,7 +41,7 @@ const ChatMessage = React.memo(
         <div className="relative w-[660px]">
           <div className="self-end flex py-3 w-full text-left">
             <div>
-              <IconSparkles
+              <IconPillFilled
                 stroke={1}
                 className="text-blue-500 h-8 w-8 p-[.5px] mr-1"
               />

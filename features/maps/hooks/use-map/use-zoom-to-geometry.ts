@@ -49,28 +49,23 @@ export default function useZoomToGeometry(mapInstance: Map | null) {
       return;
 
     let targetPoint: [number, number] | AddressSearchProps = [
-      -75.7003, 45.4201,
+      116.397428, 39.90923,
     ];
     let targetZoom = 12;
     let isHandled = false;
 
     if (zoomToLayerRequestWithGeometry?.geometry) {
-      // Handle zoomToLayerRequestWithGeometry
       targetPoint = calculateGeometryCentroid(
         zoomToLayerRequestWithGeometry.geometry
       );
-
       targetZoom = calculateZoomLevel(zoomToLayerRequestWithGeometry.geometry);
-
       isHandled = true;
     } else if (zoomRequestFromTable?.geometry) {
-      // Handle zoomRequestFromTable
       const geometry = convertFeatureToGeometry(zoomRequestFromTable);
       targetPoint = calculateGeometryCentroid(geometry);
       targetZoom = calculateZoomLevel(geometry);
       isHandled = true;
     } else if (zoomToAddressRequest) {
-      // Handle zoomToAddressRequest
       targetPoint = zoomToAddressRequest;
       targetZoom = 16;
       isHandled = true;
@@ -87,7 +82,6 @@ export default function useZoomToGeometry(mapInstance: Map | null) {
         zoom: targetZoom,
       });
 
-      // Delay clearing the state until after the animation completes
       const timeout = setTimeout(() => {
         if (zoomToLayerRequestWithGeometry?.geometry)
           setZoomToLayerRequestWithGeometry(null);
@@ -99,8 +93,12 @@ export default function useZoomToGeometry(mapInstance: Map | null) {
     }
   }, [
     mapLoaded,
+    mapInstance,
     zoomToLayerRequestWithGeometry,
+    setZoomToLayerRequestWithGeometry,
     zoomToAddressRequest,
+    setZoomToAddressRequest,
     zoomRequestFromTable,
+    setZoomRequestFromTable,
   ]);
 }

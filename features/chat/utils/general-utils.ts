@@ -2,6 +2,7 @@ import type {
   CoreAssistantMessage,
   CoreMessage,
   CoreToolMessage,
+  LanguageModelV1,
   Message,
   ToolInvocation,
 } from "ai";
@@ -10,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { generateText, CoreUserMessage } from "ai";
 import { checkGeometryAreaIsLessThanThreshold } from "@/features/maps/utils/geometry-utils";
+import { deepseek } from "@ai-sdk/deepseek";
 
 export async function generateTitleFromUserMessage({
   message,
@@ -17,7 +19,7 @@ export async function generateTitleFromUserMessage({
   message: CoreUserMessage;
 }) {
   const { text: title } = await generateText({
-    model: openai("gpt-4o-mini"),
+    model: deepseek("deepseek-chat") as any as LanguageModelV1,
     system: `\n
     - you will generate a short title based on the first message a user begins a conversation with
     - ensure it is not more than 80 characters long

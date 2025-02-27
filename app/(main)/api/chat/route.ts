@@ -1,10 +1,12 @@
 import { openai } from "@ai-sdk/openai";
+import { deepseek } from "@ai-sdk/deepseek";
 import { azure } from "@ai-sdk/azure"; // You can also use Azure's hosted GPT models. More info: https://sdk.vercel.ai/providers/ai-sdk-providers
 import {
   type Message,
   type CoreUserMessage,
   streamText,
   convertToCoreMessages,
+  LanguageModelV1,
 } from "ai";
 
 import { createClient } from "@/utils/supabase/server";
@@ -140,7 +142,7 @@ export async function POST(request: Request) {
   ] as Array<Message>;
 
   const result = await streamText({
-    model: openai("gpt-4o"),
+    model: deepseek("deepseek-chat") as any as LanguageModelV1,
     // model: azure("gpt-4o"),  // You can also use Azure's hosted GPT models
     maxSteps: 5,
     messages: convertToCoreMessages(processedMessages),

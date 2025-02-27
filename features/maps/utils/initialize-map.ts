@@ -4,51 +4,74 @@ export const initializeMap = (containerId: string): maplibregl.Map => {
   return new maplibregl.Map({
     container: containerId,
     attributionControl: false,
-
     style: {
       version: 8,
       sources: {
-        "google-satellite-imagery": {
+        "amap-satellite-imagery": {
           type: "raster",
           tiles: [
-            "/api/services/google-maps/basemaps/satellite?z={z}&x={x}&y={y}",
+            "https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
           ],
           tileSize: 256,
         },
-        "osm-tiles": {
+        "amap-roadmap": {
           type: "raster",
           tiles: [
-            "/api/services/google-maps/basemaps/roadmap?z={z}&x={x}&y={y}",
+            "https://webst01.is.autonavi.com/appmaptile?style=7&x={x}&y={y}&z={z}",
           ],
           tileSize: 256,
         },
+        // 添加地理编码点的数据源
+        "geocoded-point-source": {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: []
+          }
+        }
       },
       layers: [
         {
-          id: "googleSatelliteImagery",
+          id: "amapSatelliteImagery",
           type: "raster",
-          source: "google-satellite-imagery",
+          source: "amap-satellite-imagery",
           minzoom: 0,
-          maxzoom: 24,
+          maxzoom: 18,
           layout: {
             visibility: "visible",
           },
         },
         {
-          id: "googleRoadmap",
+          id: "amapRoadmap",
           type: "raster",
-          source: "osm-tiles",
+          source: "amap-roadmap",
           minzoom: 0,
-          maxzoom: 24,
+          maxzoom: 18,
           layout: {
             visibility: "none",
           },
         },
+        // 添加地理编码点图层
+        {
+          id: "geocoded-point",
+          type: "circle",
+          source: "geocoded-point-source",
+          paint: {
+            "circle-radius": 7,
+            "circle-color": "yellow",
+            "circle-opacity": 0.8,
+            "circle-stroke-color": "blue",
+            "circle-stroke-width": 2,
+            "circle-stroke-opacity": 1
+          },
+          layout: {
+            visibility: "none"
+          }
+        }
       ],
     },
-
-    center: [-76.493, 44.2334],
-    zoom: 2,
+    center: [116.397428, 39.90923],
+    zoom: 10,
     pitch: 0,
     bearing: 0,
     antialias: true,
