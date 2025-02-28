@@ -6,7 +6,6 @@ import {
   type CoreUserMessage,
   streamText,
   convertToCoreMessages,
-  LanguageModelV1,
 } from "ai";
 
 import { createClient } from "@/utils/supabase/server";
@@ -142,7 +141,7 @@ export async function POST(request: Request) {
   ] as Array<Message>;
 
   const result = await streamText({
-    model: deepseek("deepseek-chat") as any as LanguageModelV1,
+    model: openai("gpt-4o"),
     // model: azure("gpt-4o"),  // You can also use Azure's hosted GPT models
     maxSteps: 5,
     messages: convertToCoreMessages(processedMessages),
